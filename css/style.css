@@ -1,0 +1,75 @@
+a{
+    position: relative;
+    bottom: 30px;
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(102, 195, 255);
+    text-align: center;
+}
+body{
+    background-color: rgb(89, 93, 99);
+}
+nav{
+    color: rgb(102, 195, 255);
+    text-align: center;
+}
+header nav ul {
+    list-style: none;
+  }
+  header nav ul li {
+      color: rgb(102, 195, 255);
+    display: inline-block;
+    padding: 10px;  
+}
+header nav ul li a {
+    color: rgb(102, 195, 255);
+    text-decoration: none;
+  }
+main section img{
+    width: 30%;
+    float: right;
+      margin-top: 100px;
+      margin-right: 50px;
+  }
+  main section{
+      text-align: center;
+  }
+  div li {
+      padding-top: 5px;
+  }
+  div{
+      position: relative;
+      bottom: 100px;
+      margin-right: 300px;
+      color: rgb(102, 195, 255);
+      margin: 80px 80px 80px 80px;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .lorem{
+    color: rgb(102, 195, 255);
+      position: absolute;
+      padding: 100px;
+     top: 300px;
+     left: 500px;
+    flex-flow: wrap;
+  }
+
+ aside{
+     display: inline;
+     float: right;
+     padding: 20px 20px;
+     margin-right: 100px;
+ }
+ footer{
+     background-color: gray;
+     position: absolute;
+     padding: 50px 615px;
+     color: rgb(102, 195, 255);
+     display: inline;
+     top:620px;
+ }
+ h2{
+     text-align: right;
+ }
