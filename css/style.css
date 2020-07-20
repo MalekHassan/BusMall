@@ -3,26 +3,26 @@ a{
     bottom: 30px;
     font-size: 25px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: rgb(102, 195, 255);
+    color: rgb(12, 96, 151);
     text-align: center;
 }
 body{
-    background-color: rgb(89, 93, 99);
+    background-color: rgb(156, 127, 113);
 }
 nav{
-    color: rgb(102, 195, 255);
+    color: rgb(12, 96, 151);
     text-align: center;
 }
 header nav ul {
     list-style: none;
   }
   header nav ul li {
-      color: rgb(102, 195, 255);
+      color: rgb(12, 96, 151);
     display: inline-block;
     padding: 10px;  
 }
 header nav ul li a {
-    color: rgb(102, 195, 255);
+    color: rgb(12, 96, 151);
     text-decoration: none;
   }
 main section img{
@@ -41,14 +41,14 @@ main section img{
       position: relative;
       bottom: 100px;
       margin-right: 300px;
-      color: rgb(102, 195, 255);
+      color: rgb(12, 96, 151);
       margin: 80px 80px 80px 80px;
   }
   .pointer {
     cursor: pointer;
   }
   .lorem{
-    color: rgb(102, 195, 255);
+    color: rgb(12, 96, 151);
       position: absolute;
       padding: 100px;
      top: 300px;
@@ -66,9 +66,10 @@ main section img{
      background-color: gray;
      position: absolute;
      padding: 50px 615px;
-     color: rgb(102, 195, 255);
+     color: rgb(12, 96, 151);
      display: inline;
-     top:620px;
+     top:2200px;
+     left:10px
  }
  h2{
      text-align: right;
