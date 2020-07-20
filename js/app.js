@@ -5,6 +5,9 @@ var sumOfClicks = 0;
 var rightindex;
 var leftindex;
 var midindex;
+var prevousProducts = [];
+var productName = [];
+var numOfClicks = [];
 // console.log(AllProducts);
 function Productes(name, path) {
   this.name = name;
@@ -12,6 +15,7 @@ function Productes(name, path) {
   this.clicks = 0;
   this.views = 0;
   AllProducts.push(this);
+  productName.push(this.name);
 }
 new Productes('bag', 'images/bag.jpg');
 new Productes('banana', 'images/banana.jpg');
@@ -36,7 +40,7 @@ new Productes('wine-glass', 'images/wine-glass.jpg');
 
 function randomNumber() {
   var number = Math.floor(Math.random() * AllProducts.length);
-  console.log(number);
+  // console.log(number);
   return number;
 }
 randomProduct();
@@ -53,6 +57,44 @@ function randomProduct() {
   while (rightindex === leftindex || rightindex === midindex) {
     rightindex = randomNumber();
   }
+  console.log('prevouse products  ' + prevousProducts);
+  for (var i = 0; i < prevousProducts.length; i++) {
+    if (leftindex === prevousProducts[i]) {
+      console.log('befor regenerat the left index ' + leftindex);
+      var newnum0 = randomNumber();
+      leftindex = newnum0;
+      prevousProducts[0] = leftindex;
+      console.log('after regenerat the left index ' + leftindex);
+    }
+  }
+  for (var x = 0; x < prevousProducts.length; x++) {
+    if (midindex === prevousProducts[x]) {
+      console.log('befor regenerat the mid index ' + midindex);
+      var newnum1 = randomNumber();
+      midindex = newnum1;
+      prevousProducts[1] = midindex;
+      console.log('after regenerat the mid index ' + midindex);
+    }
+  }
+  for (var y = 0; y < prevousProducts.length; y++) {
+    if (rightindex === prevousProducts[y]) {
+      console.log('befor regenerat the right index ' + rightindex);
+      var newnum2 = randomNumber();
+      rightindex = newnum2;
+      prevousProducts[2] = rightindex;
+      console.log('after regenerat the right index ' + rightindex);
+    }
+    while (leftindex === midindex || leftindex === rightindex) {
+      leftindex = randomNumber();
+    }
+    while (rightindex === leftindex || rightindex === midindex) {
+      rightindex = randomNumber();
+    }
+  }
+  prevousProducts[0] = leftindex;
+  prevousProducts[1] = rightindex;
+  prevousProducts[2] = midindex;
+  console.log('new products ' + prevousProducts);
   var leftPath = AllProducts[leftindex].path;
   var midPath = AllProducts[midindex].path;
   var rightPath = AllProducts[rightindex].path;
@@ -83,7 +125,9 @@ function clicksNumber() {
     randomProduct();
   }
   else {
+    shearMyData();
     finalMassege();
+    chartgenerator();
     sectionpro.removeEventListener('click', clicksNumber);
   }
 }
@@ -92,7 +136,38 @@ function finalMassege() {
   for (var i = 0; i < AllProducts.length; i++) {
     var listData = document.createElement('li');
     listData.classList.add('pointer');
-    listData.textContent = AllProducts[i].name +' had ' + AllProducts[i].clicks + ' votes and was shown '+AllProducts[i].views;
+    listData.textContent = AllProducts[i].name + ' had ' + AllProducts[i].clicks + ' votes and was shown ' + AllProducts[i].views;
     list.appendChild(listData);
   }
+}
+function shearMyData() {
+  for (let index = 0; index < AllProducts.length; index++) {
+    numOfClicks.push(AllProducts[index].clicks);
+
+  }
+}
+function chartgenerator() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: productName,
+      datasets: [{
+        label: '# of Votes',
+        data: numOfClicks,
+        backgroundColor: 'rgb(102, 195, 255)',
+        borderColor: 'orange',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
 }
