@@ -46,6 +46,16 @@ function randomNumber() {
   return number;
 }
 randomProduct();
+function chickingNumber(){
+  while (leftindex === midindex || leftindex === rightindex) {
+    leftindex = randomNumber();
+    chickingNumber();
+  }
+  while (rightindex === leftindex || rightindex === midindex) {
+    rightindex = randomNumber();
+    chickingNumber();
+  }
+}
 function randomProduct() {
   var leftPro = document.getElementById('left-product');
   var midPro = document.getElementById('mid-product');
@@ -53,17 +63,15 @@ function randomProduct() {
   leftindex = randomNumber();
   midindex = randomNumber();
   rightindex = randomNumber();
-  while (leftindex === midindex || leftindex === rightindex) {
-    leftindex = randomNumber();
-  }
-  while (rightindex === leftindex || rightindex === midindex) {
-    rightindex = randomNumber();
-  }
-  // console.log('prevouse products  ' + prevousProducts);
+  // console.log('the new generated befor checking with prvouse numbers before checking '+leftindex+' ,'+ midindex+' ,'+rightindex);
+  chickingNumber(leftindex,midindex,rightindex);
+  // console.log('numbers after checking '+leftindex+' ,'+ midindex+' ,'+rightindex);
+  // console.log('prevouse products after checking whith each other ' + prevousProducts);
   for (var i = 0; i < prevousProducts.length; i++) {
     if (leftindex === prevousProducts[i]) {
       // console.log('befor regenerat the left index ' + leftindex);
       var newnum0 = randomNumber();
+      chickingNumber();
       leftindex = newnum0;
       prevousProducts[0] = leftindex;
       // console.log('after regenerat the left index ' + leftindex);
@@ -73,6 +81,7 @@ function randomProduct() {
     if (midindex === prevousProducts[x]) {
       // console.log('befor regenerat the mid index ' + midindex);
       var newnum1 = randomNumber();
+      chickingNumber();
       midindex = newnum1;
       prevousProducts[1] = midindex;
       // console.log('after regenerat the mid index ' + midindex);
@@ -82,21 +91,17 @@ function randomProduct() {
     if (rightindex === prevousProducts[y]) {
       // console.log('befor regenerat the right index ' + rightindex);
       var newnum2 = randomNumber();
+      chickingNumber();
       rightindex = newnum2;
       prevousProducts[2] = rightindex;
       // console.log('after regenerat the right index ' + rightindex);
     }
-    while (leftindex === midindex || leftindex === rightindex) {
-      leftindex = randomNumber();
-    }
-    while (rightindex === leftindex || rightindex === midindex) {
-      rightindex = randomNumber();
-    }
+    chickingNumber();
   }
   prevousProducts[0] = leftindex;
   prevousProducts[1] = rightindex;
   prevousProducts[2] = midindex;
-  // console.log('new products ' + prevousProducts);
+  // console.log('new products after checking with the prevous ' + prevousProducts);
   var leftPath = AllProducts[leftindex].path;
   var midPath = AllProducts[midindex].path;
   var rightPath = AllProducts[rightindex].path;
