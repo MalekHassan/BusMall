@@ -8,6 +8,7 @@ var midindex;
 var prevousProducts = [];
 var productName = [];
 var numOfClicks = [];
+var numOfViews=[];
 // console.log(AllProducts);
 function Productes(name, path) {
   this.name = name;
@@ -143,10 +144,34 @@ function finalMassege() {
 function shearMyData() {
   for (let index = 0; index < AllProducts.length; index++) {
     numOfClicks.push(AllProducts[index].clicks);
+    numOfViews.push(AllProducts[index].views);
 
   }
 }
 function chartgenerator() {
+  var ctx = document.getElementById('myChart1').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: productName,
+      datasets: [{
+        label: '# of Views',
+        data: numOfViews,
+        backgroundColor: 'rgb(102, 195, 255)',
+        borderColor: 'orange',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
