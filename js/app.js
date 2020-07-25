@@ -9,6 +9,7 @@ var prevousProducts = [];
 var productName = [];
 var clicks = [];
 var views=[];
+// Constructor
 // console.log(AllProducts);
 function Productes(name, path) {
   this.name = name;
@@ -19,6 +20,7 @@ function Productes(name, path) {
   productName.push(this.name);
   // console.log(AllProducts);
 }
+// Creating a new objects
 new Productes('bag', 'images/bag.jpg');
 new Productes('banana', 'images/banana.jpg');
 new Productes('bathroom', 'images/bathroom.jpg');
@@ -39,13 +41,14 @@ new Productes('unicorn', 'images/unicorn.jpg');
 new Productes('usb', 'images/usb.gif');
 new Productes('water-can', 'images/water-can.jpg');
 new Productes('wine-glass', 'images/wine-glass.jpg');
-
+// Generating a random number function
 function randomNumber() {
   var number = Math.floor(Math.random() * AllProducts.length);
   // console.log(number);
   return number;
 }
 randomProduct();
+// Checking the generated number if they are equal or not
 function chickingNumber(){
   while (leftindex === midindex || leftindex === rightindex) {
     leftindex = randomNumber();
@@ -56,6 +59,7 @@ function chickingNumber(){
     chickingNumber();
   }
 }
+// generate numbers and making sure that those numbers will not be repettive in the second round
 function randomProduct() {
   var leftPro = document.getElementById('left-product');
   var midPro = document.getElementById('mid-product');
@@ -102,6 +106,7 @@ function randomProduct() {
   prevousProducts[1] = rightindex;
   prevousProducts[2] = midindex;
   // console.log('new products after checking with the prevous ' + prevousProducts);
+  // making pathes for our image depending on our generated number
   var leftPath = AllProducts[leftindex].path;
   var midPath = AllProducts[midindex].path;
   var rightPath = AllProducts[rightindex].path;
@@ -112,6 +117,7 @@ function randomProduct() {
   midPro.setAttribute('src', midPath);
   rightPro.setAttribute('src', rightPath);
 }
+// geting information form the HTML page by adding add event listener and counting the number of votes
 sectionpro.addEventListener('click', clicksNumber);
 function clicksNumber() {
   if (sumOfClicks < 25) {
@@ -132,6 +138,7 @@ function clicksNumber() {
     randomProduct();
   }
   else {
+    // calling my functions 
     shearMyData();
     finalMassege();
     chartgenerator();
@@ -139,6 +146,7 @@ function clicksNumber() {
     sectionpro.removeEventListener('click', clicksNumber);
   }
 }
+// making sure that my local storage will save my string data
 function saveOurData(){
   // console.log('AllProducts array before  ' +AllProducts);
   var srtingProducts=JSON.stringify(AllProducts);
@@ -147,12 +155,14 @@ function saveOurData(){
   // console.log(localStorage);
 
 }
+// changing my saved data from string to numbers to make sure that we can update on it
 savingNewObject();
 function savingNewObject(){
   var preProducts=JSON.parse(localStorage.getItem('Product'));
   console.log(preProducts);
   newClicks(preProducts);
 }
+// update the clicking votes 
 function newClicks(preProducts){
   for (var k=0;k<AllProducts.length;k++){
     AllProducts[k].clicks=preProducts[k].clicks;
@@ -160,6 +170,7 @@ function newClicks(preProducts){
     AllProducts[k].views=preProducts[k].views;
   }
 }
+// printing the final massag that contian the name of the product and the numbers of voting
 function finalMassege() {
   var list = document.getElementById('customerChoise');
   for (var i = 0; i < AllProducts.length; i++) {
@@ -169,6 +180,7 @@ function finalMassege() {
     list.appendChild(listData);
   }
 }
+// update my number of views and clickes and shear them on the page
 function shearMyData() {
   for (let index = 0; index < AllProducts.length; index++) {
     clicks.push(AllProducts[index].clicks);
@@ -176,6 +188,7 @@ function shearMyData() {
 
   }
 }
+// Chart function
 function chartgenerator() {
   var ctx = document.getElementById('myChart1').getContext('2d');
   var myChart = new Chart(ctx, {
