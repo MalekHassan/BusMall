@@ -58,3 +58,26 @@ main #customerChoise{
  h2{
     text-align: right;
 }
+@keyframes slide {
+    0% {
+      left: 0;
+      top: 0;
+    }
+    50% {
+      left: 244px;
+      top: 100px;
+    }
+    100% {
+      left: 488px;
+      top: 0;
+    }
+  }
+ #left-product{
+    cursor: pointer;
+}
+#right-product{
+    cursor: pointer;
+}
+#mid-product{
+    cursor: pointer;
+}

@@ -9,6 +9,7 @@ var prevousProducts = [];
 var productName = [];
 var clicks = [];
 var views=[];
+// Constructor
 // console.log(AllProducts);
 function Productes(name, path) {
   this.name = name;
@@ -19,6 +20,7 @@ function Productes(name, path) {
   productName.push(this.name);
   // console.log(AllProducts);
 }
+// Creating a new objects
 new Productes('bag', 'images/bag.jpg');
 new Productes('banana', 'images/banana.jpg');
 new Productes('bathroom', 'images/bathroom.jpg');
@@ -39,13 +41,25 @@ new Productes('unicorn', 'images/unicorn.jpg');
 new Productes('usb', 'images/usb.gif');
 new Productes('water-can', 'images/water-can.jpg');
 new Productes('wine-glass', 'images/wine-glass.jpg');
-
+// Generating a random number function
 function randomNumber() {
   var number = Math.floor(Math.random() * AllProducts.length);
   // console.log(number);
   return number;
 }
 randomProduct();
+// Checking the generated number if they are equal or not
+function chickingNumber(){
+  while (leftindex === midindex || leftindex === rightindex) {
+    leftindex = randomNumber();
+    chickingNumber();
+  }
+  while (rightindex === leftindex || rightindex === midindex) {
+    rightindex = randomNumber();
+    chickingNumber();
+  }
+}
+// generate numbers and making sure that those numbers will not be repettive in the second round
 function randomProduct() {
   var leftPro = document.getElementById('left-product');
   var midPro = document.getElementById('mid-product');
@@ -53,17 +67,15 @@ function randomProduct() {
   leftindex = randomNumber();
   midindex = randomNumber();
   rightindex = randomNumber();
-  while (leftindex === midindex || leftindex === rightindex) {
-    leftindex = randomNumber();
-  }
-  while (rightindex === leftindex || rightindex === midindex) {
-    rightindex = randomNumber();
-  }
-  // console.log('prevouse products  ' + prevousProducts);
+  // console.log('the new generated befor checking with prvouse numbers before checking '+leftindex+' ,'+ midindex+' ,'+rightindex);
+  chickingNumber(leftindex,midindex,rightindex);
+  // console.log('numbers after checking '+leftindex+' ,'+ midindex+' ,'+rightindex);
+  // console.log('prevouse products after checking whith each other ' + prevousProducts);
   for (var i = 0; i < prevousProducts.length; i++) {
     if (leftindex === prevousProducts[i]) {
       // console.log('befor regenerat the left index ' + leftindex);
       var newnum0 = randomNumber();
+      chickingNumber();
       leftindex = newnum0;
       prevousProducts[0] = leftindex;
       // console.log('after regenerat the left index ' + leftindex);
@@ -73,6 +85,7 @@ function randomProduct() {
     if (midindex === prevousProducts[x]) {
       // console.log('befor regenerat the mid index ' + midindex);
       var newnum1 = randomNumber();
+      chickingNumber();
       midindex = newnum1;
       prevousProducts[1] = midindex;
       // console.log('after regenerat the mid index ' + midindex);
@@ -82,21 +95,18 @@ function randomProduct() {
     if (rightindex === prevousProducts[y]) {
       // console.log('befor regenerat the right index ' + rightindex);
       var newnum2 = randomNumber();
+      chickingNumber();
       rightindex = newnum2;
       prevousProducts[2] = rightindex;
       // console.log('after regenerat the right index ' + rightindex);
     }
-    while (leftindex === midindex || leftindex === rightindex) {
-      leftindex = randomNumber();
-    }
-    while (rightindex === leftindex || rightindex === midindex) {
-      rightindex = randomNumber();
-    }
+    chickingNumber();
   }
   prevousProducts[0] = leftindex;
   prevousProducts[1] = rightindex;
   prevousProducts[2] = midindex;
-  // console.log('new products ' + prevousProducts);
+  // console.log('new products after checking with the prevous ' + prevousProducts);
+  // making pathes for our image depending on our generated number
   var leftPath = AllProducts[leftindex].path;
   var midPath = AllProducts[midindex].path;
   var rightPath = AllProducts[rightindex].path;
@@ -107,6 +117,7 @@ function randomProduct() {
   midPro.setAttribute('src', midPath);
   rightPro.setAttribute('src', rightPath);
 }
+// geting information form the HTML page by adding add event listener and counting the number of votes
 sectionpro.addEventListener('click', clicksNumber);
 function clicksNumber() {
   if (sumOfClicks < 25) {
@@ -127,6 +138,7 @@ function clicksNumber() {
     randomProduct();
   }
   else {
+    // calling my functions 
     shearMyData();
     finalMassege();
     chartgenerator();
@@ -134,6 +146,7 @@ function clicksNumber() {
     sectionpro.removeEventListener('click', clicksNumber);
   }
 }
+// making sure that my local storage will save my string data
 function saveOurData(){
   // console.log('AllProducts array before  ' +AllProducts);
   var srtingProducts=JSON.stringify(AllProducts);
@@ -142,12 +155,14 @@ function saveOurData(){
   // console.log(localStorage);
 
 }
+// changing my saved data from string to numbers to make sure that we can update on it
 savingNewObject();
 function savingNewObject(){
   var preProducts=JSON.parse(localStorage.getItem('Product'));
   console.log(preProducts);
   newClicks(preProducts);
 }
+// update the clicking votes 
 function newClicks(preProducts){
   for (var k=0;k<AllProducts.length;k++){
     AllProducts[k].clicks=preProducts[k].clicks;
@@ -155,6 +170,7 @@ function newClicks(preProducts){
     AllProducts[k].views=preProducts[k].views;
   }
 }
+// printing the final massag that contian the name of the product and the numbers of voting
 function finalMassege() {
   var list = document.getElementById('customerChoise');
   for (var i = 0; i < AllProducts.length; i++) {
@@ -164,6 +180,7 @@ function finalMassege() {
     list.appendChild(listData);
   }
 }
+// update my number of views and clickes and shear them on the page
 function shearMyData() {
   for (let index = 0; index < AllProducts.length; index++) {
     clicks.push(AllProducts[index].clicks);
@@ -171,6 +188,7 @@ function shearMyData() {
 
   }
 }
+// Chart function
 function chartgenerator() {
   var ctx = document.getElementById('myChart1').getContext('2d');
   var myChart = new Chart(ctx, {
