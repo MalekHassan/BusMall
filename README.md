@@ -37,7 +37,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 2. Clone the repo
 
-`git clone https://github.com/AbdallahSafi/bus-mall.git`
+`git clone https://github.com/MalekHassan/BusMall`
 
 # Usage
 
